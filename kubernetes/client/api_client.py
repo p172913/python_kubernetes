@@ -261,7 +261,14 @@ class ApiClient(object):
         except ValueError:
             data = response.data
 
-        return self.__deserialize(data, response_type)
+        result = self.__deserialize(data, response_type)
+        if response_type == "V1PodList":
+            for pod in result.items:
+                if pod.metadata and pod.metadata.deletion_timestamp:
+                    pod.status.phase = "Terminating"
+
+        print(result)
+        return result
 
     def __deserialize(self, data, klass):
         """Deserializes dict, list, str into an object.
