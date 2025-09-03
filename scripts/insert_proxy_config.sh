@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # insert_proxy_config.sh - run this after openapi-generator release.sh
-CONFIG_PATH="../python_kubernetes/kubernetes/client"
+CONFIG_PATH="../kubernetes/client"
+# there is path error here, so we need to fix it related to #2390
 
 # Compute the full file path
 CONFIG_FILE="$CONFIG_PATH/configuration.py"
